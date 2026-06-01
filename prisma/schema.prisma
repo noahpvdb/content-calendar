@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model ContentIdea {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  platform    String
+  pillar      String?
+  tags        String   @default("[]")
+  priority    String   @default("medium")
+  status      String   @default("idea")
+  notes       String?
+  caption     String?
+  imageUrls   String   @default("[]")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  scheduledPosts ScheduledPost[]
+}
+
+model ScheduledPost {
+  id            String      @id @default(cuid())
+  ideaId        String
+  idea          ContentIdea @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  scheduledDate DateTime
+  scheduledTime String      @default("09:00")
+  status        String      @default("scheduled")
+  caption       String?
+  platform      String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
