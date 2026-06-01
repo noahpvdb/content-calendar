@@ -1,10 +1,9 @@
 import { PrismaClient } from '@prisma/client'
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
-import path from 'node:path'
+import { PrismaNeon } from '@prisma/adapter-neon'
+import { neon } from '@neondatabase/serverless'
 
-const dbPath = path.resolve(process.cwd(), 'dev.db')
-const adapter = new PrismaBetterSqlite3({ url: dbPath })
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const sql = neon(process.env.DATABASE_URL!)
+const adapter = new PrismaNeon(sql)
 const prisma = new PrismaClient({ adapter } as any)
 
 const ideas = [
