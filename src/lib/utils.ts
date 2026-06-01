@@ -12,6 +12,7 @@ export const PLATFORMS = [
   { value: 'linkedin', label: 'LinkedIn', color: '#0A66C2' },
   { value: 'twitter', label: 'X/Twitter', color: '#1DA1F2' },
   { value: 'youtube', label: 'YouTube', color: '#FF0000' },
+  { value: 'email', label: 'Email', color: '#6B7280' },
 ]
 
 export const PILLARS = [
