@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, Suspense } from 'react'
 import { Plus, Trash2, Pencil, Clock } from 'lucide-react'
 import { format } from 'date-fns'
-import { STATUS_COLORS, getPlatformLabel } from '@/lib/utils'
+import { STATUS_COLORS, getPlatformLabel, PLATFORMS } from '@/lib/utils'
 import { useSearchParams } from 'next/navigation'
 
 type Post = {
@@ -125,6 +125,7 @@ function ScheduledContent() {
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [editingPost, setEditingPost] = useState<Post | null>(null)
+  const [platformFilter, setPlatformFilter] = useState('all')
   const searchParams = useSearchParams()
 
   useEffect(() => {
@@ -169,7 +170,9 @@ function ScheduledContent() {
     fetchPosts()
   }
 
-  const grouped = posts.reduce((acc: Record<string, Post[]>, post) => {
+  const filteredPosts = platformFilter === 'all' ? posts : posts.filter(p => p.platform === platformFilter)
+
+  const grouped = filteredPosts.reduce((acc: Record<string, Post[]>, post) => {
     const key = format(new Date(post.scheduledDate), 'yyyy-MM-dd')
     if (!acc[key]) acc[key] = []
     acc[key].push(post)
@@ -181,7 +184,7 @@ function ScheduledContent() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-semibold text-gray-900">Scheduled Posts</h2>
-          <p className="text-gray-500 text-sm mt-0.5">{posts.length} posts</p>
+          <p className="text-gray-500 text-sm mt-0.5">{filteredPosts.length} posts</p>
         </div>
         <button
           onClick={() => { setEditingPost(null); setShowForm(true) }}
@@ -189,6 +192,17 @@ function ScheduledContent() {
         >
           <Plus size={15} /> Schedule Post
         </button>
+      </div>
+
+      <div className="flex gap-3 mb-6">
+        <select
+          value={platformFilter}
+          onChange={e => setPlatformFilter(e.target.value)}
+          className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
+        >
+          <option value="all">All Platforms</option>
+          {PLATFORMS.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
+        </select>
       </div>
 
       {loading ? (
