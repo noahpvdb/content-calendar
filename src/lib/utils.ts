@@ -40,3 +40,17 @@ export function getPlatformColor(platform: string): string {
 export function getPlatformLabel(platform: string): string {
   return PLATFORMS.find(p => p.value === platform)?.label ?? platform
 }
+
+// Parse platform field — handles both old single strings and new JSON arrays
+export function parsePlatforms(platform: string): string[] {
+  try {
+    const parsed = JSON.parse(platform)
+    return Array.isArray(parsed) ? parsed : [platform]
+  } catch {
+    return [platform]
+  }
+}
+
+export function getPlatformsLabel(platform: string): string {
+  return parsePlatforms(platform).map(getPlatformLabel).join(', ')
+}
