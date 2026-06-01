@@ -8,9 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 export const PLATFORMS = [
   { value: 'instagram', label: 'Instagram', color: '#E1306C' },
   { value: 'facebook', label: 'Facebook', color: '#1877F2' },
-  { value: 'tiktok', label: 'TikTok', color: '#000000' },
   { value: 'linkedin', label: 'LinkedIn', color: '#0A66C2' },
-  { value: 'twitter', label: 'X/Twitter', color: '#1DA1F2' },
   { value: 'youtube', label: 'YouTube', color: '#FF0000' },
   { value: 'email', label: 'Email', color: '#6B7280' },
 ]
