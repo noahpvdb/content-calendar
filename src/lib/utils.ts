@@ -9,7 +9,6 @@ export const PLATFORMS = [
   { value: 'instagram', label: 'Instagram', color: '#E1306C' },
   { value: 'facebook', label: 'Facebook', color: '#1877F2' },
   { value: 'linkedin', label: 'LinkedIn', color: '#0A66C2' },
-  { value: 'youtube', label: 'YouTube', color: '#FF0000' },
   { value: 'email', label: 'Email', color: '#6B7280' },
 ]
 
