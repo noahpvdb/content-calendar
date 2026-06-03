@@ -13,7 +13,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           'image/jpeg', 'image/png', 'image/gif',
           'image/webp', 'image/heic', 'video/mp4', 'video/quicktime',
         ],
-        maximumSizeInBytes: 50 * 1024 * 1024, // 50MB
+        maximumSizeInBytes: 500 * 1024 * 1024, // 500MB
       }),
       onUploadCompleted: async ({ blob }) => {
         console.log('Upload complete:', blob.url)
