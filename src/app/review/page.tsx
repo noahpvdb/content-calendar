@@ -94,12 +94,18 @@ function IdeaCard({ idea, onApprove, onReject, onReset }: {
             <div>
               <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">Uploaded Content</p>
               <div className="grid grid-cols-3 gap-2">
-                {images.map((url, i) => (
-                  <a key={i} href={url} target="_blank" rel="noopener noreferrer">
-                    <img src={url} alt={`Upload ${i + 1}`}
-                      className="w-full h-40 object-cover rounded-lg border border-gray-100 hover:opacity-90 transition-opacity" />
-                  </a>
-                ))}
+                {images.map((url, i) => {
+                  const isVideo = /\.(mp4|mov|webm|avi|mkv)(\?|$)/i.test(url)
+                  return isVideo ? (
+                    <video key={i} src={url} controls
+                      className="w-full h-40 object-cover rounded-lg border border-gray-100" />
+                  ) : (
+                    <a key={i} href={url} target="_blank" rel="noopener noreferrer">
+                      <img src={url} alt={`Upload ${i + 1}`}
+                        className="w-full h-40 object-cover rounded-lg border border-gray-100 hover:opacity-90 transition-opacity" />
+                    </a>
+                  )
+                })}
               </div>
             </div>
           )}

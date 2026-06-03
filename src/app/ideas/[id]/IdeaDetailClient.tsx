@@ -285,16 +285,24 @@ export function IdeaDetailClient({ idea: initialIdea }: { idea: Idea }) {
             </div>
           ) : (
             <div className="grid grid-cols-3 gap-2">
-              {images.map((url, i) => (
-                <div key={i} className="relative group">
-                  <img src={url} alt={`Upload ${i + 1}`}
-                    className="w-full h-36 object-cover rounded-lg border" style={{ borderColor: '#E8E0CC' }} />
-                  <button onClick={() => handleRemoveImage(url)}
-                    className="absolute top-1.5 right-1.5 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <X size={11} />
-                  </button>
-                </div>
-              ))}
+              {images.map((url, i) => {
+                const isVideo = /\.(mp4|mov|webm|avi|mkv)(\?|$)/i.test(url)
+                return (
+                  <div key={i} className="relative group">
+                    {isVideo ? (
+                      <video src={url} controls
+                        className="w-full h-36 object-cover rounded-lg border" style={{ borderColor: '#E8E0CC' }} />
+                    ) : (
+                      <img src={url} alt={`Upload ${i + 1}`}
+                        className="w-full h-36 object-cover rounded-lg border" style={{ borderColor: '#E8E0CC' }} />
+                    )}
+                    <button onClick={() => handleRemoveImage(url)}
+                      className="absolute top-1.5 right-1.5 bg-red-600 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <X size={11} />
+                    </button>
+                  </div>
+                )
+              })}
               <div className="h-36 border-2 border-dashed rounded-lg flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity"
                 style={{ borderColor: '#E8E0CC' }} onClick={() => fileInputRef.current?.click()}>
                 <div className="text-center">
