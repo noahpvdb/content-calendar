@@ -32,6 +32,9 @@ export async function PATCH(
       ...(body.status !== undefined ? { status: body.status } : {}),
       ...(body.notes !== undefined ? { notes: body.notes } : {}),
       ...(body.caption !== undefined ? { caption: body.caption } : {}),
+      ...(body.approvalStatus !== undefined ? { approvalStatus: body.approvalStatus } : {}),
+      ...(body.approvalNotes !== undefined ? { approvalNotes: body.approvalNotes } : {}),
+      ...(body.imageUrls !== undefined ? { imageUrls: JSON.stringify(body.imageUrls) } : {}),
     },
   })
   return NextResponse.json(idea)

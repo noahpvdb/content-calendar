@@ -17,9 +17,11 @@ model ContentIdea {
   status      String   @default("idea")
   notes       String?
   caption     String?
-  imageUrls   String   @default("[]")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  imageUrls      String   @default("[]")
+  approvalStatus String   @default("pending") // pending, approved, rejected
+  approvalNotes  String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
   scheduledPosts ScheduledPost[]
 }
 

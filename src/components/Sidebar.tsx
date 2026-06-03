@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Lightbulb, Calendar, Clock, Settings } from 'lucide-react'
+import { LayoutDashboard, Lightbulb, Calendar, Clock, CheckSquare, Settings } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const nav = [
@@ -10,6 +10,7 @@ const nav = [
   { href: '/ideas', label: 'Ideas', icon: Lightbulb },
   { href: '/calendar', label: 'Calendar', icon: Calendar },
   { href: '/scheduled', label: 'Scheduled', icon: Clock },
+  { href: '/review', label: 'Review', icon: CheckSquare },
   { href: '/settings', label: 'Settings', icon: Settings },
 ]
 
@@ -29,9 +30,7 @@ export function Sidebar() {
             href={href}
             className={cn(
               'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
-              pathname === href
-                ? 'text-white'
-                : 'hover:text-white'
+              pathname === href ? 'text-white' : 'hover:text-white'
             )}
             style={
               pathname === href
