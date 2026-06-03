@@ -112,23 +112,29 @@ export function IdeaDetailClient({ idea: initialIdea }: { idea: Idea }) {
     const files = e.target.files
     if (!files || files.length === 0) return
     setUploading(true)
-    const newUrls: string[] = []
-    for (const file of Array.from(files)) {
-      const fd = new FormData()
-      fd.append('file', file)
-      const res = await fetch('/api/upload', { method: 'POST', body: fd })
-      const { url } = await res.json()
-      newUrls.push(url)
+    try {
+      const newUrls: string[] = []
+      for (const file of Array.from(files)) {
+        const fd = new FormData()
+        fd.append('file', file)
+        const res = await fetch('/api/upload', { method: 'POST', body: fd })
+        const data = await res.json()
+        if (!res.ok) throw new Error(data.error ?? 'Upload failed')
+        newUrls.push(data.url)
+      }
+      const merged = [...images, ...newUrls]
+      await fetch(`/api/ideas/${idea.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageUrls: merged }),
+      })
+      setIdea(prev => ({ ...prev, imageUrls: JSON.stringify(merged) }))
+    } catch (err) {
+      alert(`Upload failed: ${err instanceof Error ? err.message : 'Unknown error'}`)
+    } finally {
+      setUploading(false)
+      if (fileInputRef.current) fileInputRef.current.value = ''
     }
-    const merged = [...images, ...newUrls]
-    await fetch(`/api/ideas/${idea.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ imageUrls: merged }),
-    })
-    setIdea(prev => ({ ...prev, imageUrls: JSON.stringify(merged) }))
-    setUploading(false)
-    if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
   async function handleRemoveImage(url: string) {
