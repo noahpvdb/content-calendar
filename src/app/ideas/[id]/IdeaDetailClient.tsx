@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import { format } from 'date-fns'
 import { useRouter } from 'next/navigation'
+import { upload } from '@vercel/blob/client'
 import { Trash2, Pencil, Check, X, Upload, CheckCircle, XCircle, Clock, ImageIcon, Loader } from 'lucide-react'
 import { STATUS_COLORS, PRIORITY_COLORS, PLATFORMS, PILLARS, parsePlatforms } from '@/lib/utils'
 
@@ -115,12 +116,12 @@ export function IdeaDetailClient({ idea: initialIdea }: { idea: Idea }) {
     try {
       const newUrls: string[] = []
       for (const file of Array.from(files)) {
-        const fd = new FormData()
-        fd.append('file', file)
-        const res = await fetch('/api/upload', { method: 'POST', body: fd })
-        const data = await res.json()
-        if (!res.ok) throw new Error(data.error ?? 'Upload failed')
-        newUrls.push(data.url)
+        // Upload directly from browser to Blob — bypasses the 4.5MB serverless limit
+        const blob = await upload(file.name, file, {
+          access: 'public',
+          handleUploadUrl: '/api/upload',
+        })
+        newUrls.push(blob.url)
       }
       const merged = [...images, ...newUrls]
       await fetch(`/api/ideas/${idea.id}`, {
