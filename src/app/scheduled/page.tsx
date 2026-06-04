@@ -180,7 +180,7 @@ function ScheduledContent() {
   }, {})
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
+    <div className="p-4 md:p-8 max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-semibold text-gray-900">Scheduled Posts</h2>
@@ -232,7 +232,7 @@ function ScheduledContent() {
                         <p className="text-xs text-gray-400 truncate mt-0.5">{post.caption}</p>
                       )}
                     </div>
-                    <div className="flex items-center gap-3 shrink-0">
+                    <div className="flex items-center gap-2 shrink-0">
                       <span className="text-xs text-gray-500">{getPlatformLabel(post.platform)}</span>
                       <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[post.status]}`}>
                         {post.status}

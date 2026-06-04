@@ -93,7 +93,7 @@ function IdeaCard({ idea, onApprove, onReject, onReset }: {
           {images.length > 0 && (
             <div>
               <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">Uploaded Content</p>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {images.map((url, i) => {
                   const isVideo = /\.(mp4|mov|webm|avi|mkv)(\?|$)/i.test(url)
                   return isVideo ? (
@@ -260,14 +260,14 @@ export default function ReviewPage() {
   }
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
+    <div className="p-4 md:p-8 max-w-4xl mx-auto">
       <div className="mb-8">
         <h2 className="text-2xl font-semibold" style={{ color: '#2C3D2E' }}>Content Review</h2>
         <p className="text-sm mt-1" style={{ color: '#6B7280' }}>Approve or reject content ideas before they go live</p>
       </div>
 
       {/* Filter tabs */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-6">
         {(['pending', 'approved', 'rejected', 'all'] as const).map(f => {
           const cfg = f === 'all'
             ? { label: 'All', color: '#374151', bg: '#F3F4F6', border: '#E5E7EB', activeBg: '#2C3D2E', activeColor: '#C9A84C' }

@@ -238,7 +238,7 @@ function IdeasContent() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -254,8 +254,8 @@ function IdeasContent() {
           </button>
         </div>
 
-        <div className="flex gap-3 mb-6">
-          <div className="relative flex-1 max-w-sm">
+        <div className="flex flex-wrap gap-3 mb-6">
+          <div className="relative flex-1 min-w-[160px]">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               value={search}
@@ -304,7 +304,7 @@ function IdeasContent() {
         {loading ? (
           <div className="text-center py-12" style={{ color: '#9CA3AF' }}>Loading...</div>
         ) : viewMode === 'table' ? (
-          <div className="rounded-xl shadow-sm overflow-hidden" style={{ backgroundColor: '#fff', border: '1px solid #E8E0CC' }}>
+          <div className="rounded-xl shadow-sm overflow-x-auto" style={{ backgroundColor: '#fff', border: '1px solid #E8E0CC' }}>
             <table className="w-full">
               <thead>
                 <tr style={{ borderBottom: '1px solid #F0EAD6', backgroundColor: '#FAF7F0' }}>
@@ -376,7 +376,7 @@ function IdeasContent() {
             </table>
           </div>
         ) : (
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {ideas.map(idea => (
               <div key={idea.id} className="rounded-xl shadow-sm p-5 hover:shadow-md transition-shadow" style={{ backgroundColor: '#fff', border: '1px solid #E8E0CC' }}>
                 <div className="flex items-start justify-between mb-2">

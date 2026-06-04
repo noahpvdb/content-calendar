@@ -49,13 +49,13 @@ export default function CalendarPage() {
   }
 
   return (
-    <div className="p-8 max-w-6xl mx-auto">
+    <div className="p-4 md:p-8 max-w-6xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-semibold" style={{ color: '#2C3D2E' }}>Calendar</h2>
           <p className="text-sm mt-0.5" style={{ color: '#6B7280' }}>{format(currentDate, 'MMMM yyyy')}</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-3">
           {/* Legend */}
           <div className="flex items-center gap-3 text-xs">
             {Object.entries(APPROVAL_STYLES).map(([key, style]) => (
@@ -86,7 +86,8 @@ export default function CalendarPage() {
         </div>
       </div>
 
-      <div className="rounded-xl shadow-sm overflow-hidden" style={{ backgroundColor: '#fff', border: '1px solid #E8E0CC' }}>
+      <div className="rounded-xl shadow-sm overflow-x-auto" style={{ backgroundColor: '#fff', border: '1px solid #E8E0CC' }}>
+        <div style={{ minWidth: '560px' }}>
         {/* Day headers */}
         <div className="grid grid-cols-7" style={{ borderBottom: '1px solid #F0EAD6', backgroundColor: '#FAF7F0' }}>
           {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
@@ -135,6 +136,7 @@ export default function CalendarPage() {
             )
           })}
         </div>
+        </div> {/* end minWidth wrapper */}
       </div>
 
       {/* Post detail modal */}

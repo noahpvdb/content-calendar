@@ -194,7 +194,7 @@ export function IdeaDetailClient({ idea: initialIdea }: { idea: Idea }) {
       </div>
 
       {/* Meta */}
-      <div className="grid grid-cols-3 gap-3 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
         {[
           { label: 'Status', content: editing
             ? <select value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))} className="w-full text-sm border-0 bg-transparent focus:outline-none">
@@ -284,7 +284,7 @@ export function IdeaDetailClient({ idea: initialIdea }: { idea: Idea }) {
               <p className="text-xs mt-1" style={{ color: '#9CA3AF' }}>PNG, JPG, MP4 supported</p>
             </div>
           ) : (
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {images.map((url, i) => {
                 const isVideo = /\.(mp4|mov|webm|avi|mkv)(\?|$)/i.test(url)
                 return (

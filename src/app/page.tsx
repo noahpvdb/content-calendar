@@ -28,13 +28,13 @@ export default async function Dashboard() {
   const { totalIdeas, weekPosts, monthPosts, recentIdeas } = await getStats()
 
   return (
-    <div className="p-8 max-w-5xl mx-auto">
+    <div className="p-4 md:p-8 max-w-5xl mx-auto">
       <div className="mb-8">
         <h2 className="text-2xl font-semibold" style={{ color: '#2C3D2E' }}>Dashboard</h2>
         <p className="mt-1" style={{ color: '#6B7280' }}>{format(new Date(), 'EEEE, MMMM d, yyyy')}</p>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         {[
           { label: 'Total Ideas', value: totalIdeas, icon: Lightbulb },
           { label: 'Posts This Week', value: weekPosts, icon: Clock },
